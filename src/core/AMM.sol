@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.26;
+pragma solidity ^0.8.28;
 
 // import "../interfaces/";
 import "../libraries/tokens/ERC20.sol";
@@ -150,6 +150,16 @@ contract AMM {
         MAX_ORACLE_DN_POW = pow;
     }
 
+    /*
+    * @notice AMM initializer
+    * @param market MarketOperator deployment associated with this AMM
+    * @param oracle External price oracle which has price() and price_w() methods
+           which both return current price of collateral multiplied by 1e18
+    * @param collateral Collateral token address
+    * @param base_price Typically the initial crypto price at which AMM is deployed. Will correspond to segment 0
+    * @param fee Relative fee of the AMM: int(fee * 1e18)
+    * @param admin_fee Admin fee: how much of fee goes to admin. 50% === int(0.5 * 1e18)
+    */
     function initialize(
         address market,
         PriceOracle oracle,
